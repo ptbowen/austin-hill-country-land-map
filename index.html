@@ -162,51 +162,43 @@
     <p class="tagline">Finding the golden hall of Edoras in the West Austin Hill Country</p>
 
     <div class="brief">
-      <b>The brief:</b> 50–500 acres west of Austin, beautiful and green, with
-      <b>epic prominent hills and long views</b> — a hilltop worthy of a hall like
-      Meduseld rising over the plains of Rohan. Price is not the constraint; terrain is.
+      <b>The brief:</b> a buildable <b>ridge-edge homesite</b> within ~60 min of Austin — a narrow
+      lip where the house sits at the edge and the land falls away over a wide arc, on a green
+      <b>grass-and-woods mosaic</b>. It must be a 30–500 ac private parcel that could actually
+      be bought (not public land, not a subdivision).
       <div class="crit">
-        <span class="chip">50–500 ac</span>
-        <span class="chip">green &amp; spring-fed</span>
-        <span class="chip">prominent hilltop</span>
-        <span class="chip">long views</span>
-        <span class="chip">buildable</span>
+        <span class="chip">30–500 ac</span>
+        <span class="chip">private &amp; buyable</span>
+        <span class="chip">≤60 min from Austin</span>
+        <span class="chip">ridge edge / wide view</span>
+        <span class="chip">grass + woods</span>
       </div>
     </div>
 
     <div class="section-label">How to read this map</div>
-    <div class="legend-row"><span class="dot" style="background:#5fbf6a"></span> Edge site on a 30–500 ac private parcel — <b>buyable</b> (boundary shown)</div>
-    <div class="legend-row"><span class="dot" style="background:var(--t1)"></span> Tier 1 — best fit (green + dramatic hills + big acreage)</div>
-    <div class="legend-row"><span class="dot" style="background:var(--t2)"></span> Tier 2 — strong candidates</div>
-    <div class="legend-row"><span class="dot" style="background:var(--t3)"></span> Tier 3 — worth a look (farther, drier, or harder to get acreage)</div>
-    <div class="legend-row"><span class="dot" style="background:var(--ref)"></span> Reference landmark (geology / inspiration)</div>
-    <div class="legend-row"><span class="dot" style="background:#46c2b5"></span> Your spot — pond hilltop on RM 165</div>
+    <div class="legend-row"><span class="dot" style="background:#5fbf6a"></span> Buyable edge site — 30–500 ac private parcel (boundary shown)</div>
+    <div class="legend-row"><span class="dot" style="background:#46c2b5"></span> Your spot — Longhorn River Ranch parcel, RM 165</div>
     <div class="legend-row"><span class="dot" style="background:#d24a4a"></span> Protected / never-for-sale land (toggle on, top-right)</div>
     <p style="font-size:11.5px;color:var(--muted);line-height:1.5;margin:10px 0 0;">
-      The base map shows <b style="color:var(--gold)">real elevation contour lines</b> (OpenTopoMap).
-      Use the layers button (top-right) to switch to satellite or shaded terrain to read the relief.
-      Click any zone below to fly there.
+      Base map shows <b style="color:var(--gold)">real elevation contour lines</b> (OpenTopoMap).
+      Use the layers icon (top-right) for satellite or shaded-terrain relief. Tap any marker or
+      parcel for its details.
     </p>
 
     <div class="section-label">Buyable edge sites (153)</div>
     <p style="font-size:11.5px;color:var(--muted);line-height:1.5;margin:0 0 10px;">
-      Every green marker is a <b>narrow ridge lip</b> on a <b style="color:#5fbf6a">30–500 ac
-      private parcel</b>, ≤60 min from Austin, undeveloped. Now <b>gated by buyability</b> and
-      ranked by <b style="color:#5fbf6a">wrap-around view + grass/woods mosaic</b> (down-weighting
-      sheer cliffs) — matching the savanna-mosaic look you liked. Green outline = the real parcel
-      (TxGIO appraisal data). Click for owner, acreage, mosaic %, and edge stats.
+      Each green marker is a <b>narrow ridge lip</b> on a <b style="color:#5fbf6a">30–500 ac
+      private parcel</b>, ≤60 min from Austin, undeveloped — <b>gated by buyability</b>, then ranked by
+      <b style="color:#5fbf6a">wrap-around view + grass/woods mosaic</b> (sheer-cliff drama
+      down-weighted). The green outline is the real parcel (TxGIO appraisal data); the popup shows
+      owner, acreage, and mosaic&nbsp;%.
     </p>
 
-    <div class="section-label">Search zones</div>
-    <div id="zone-list"></div>
-
     <p class="footnote">
-      These are <b>search corridors</b>, not specific listings — areas where the terrain genuinely
-      matches the Edoras vision and where 50–500 ac ranches do trade. For live parcels, pull listings
-      on LandWatch / Land.com filtered to these counties (Hays, Blanco, Travis, Burnet, Llano, Gillespie)
-      and walk them with a Hill Country ranch broker. Highest greenness sits near the eastern
-      Balcones escarpment; the most dramatic isolated hilltops sit in the Pedernales / Blanco /
-      Llano uplands to the west.
+      These are <b>terrain + parcel matches</b>, not active listings. They cluster across Blanco,
+      Hays, Comal, Kendall, Travis, Burnet, Llano &amp; Gillespie counties. The remaining step is
+      checking which are actually for sale — pull current listings (LandWatch / Land.com) for these
+      owners/parcels and walk the best with a Hill Country ranch broker.
     </p>
   </aside>
   <div id="map"></div>
@@ -877,104 +869,6 @@ window.PROTECTED = [
 
 </script>
 <script>
-  var TIER_COLORS = { 1: "#e8b84b", 2: "#6fae6a", 3: "#6f9fd0", ref: "#b06bd6" };
-  var TIER_LABEL = {
-    1: "Tier 1 · Best fit", 2: "Tier 2 · Strong candidate",
-    3: "Tier 3 · Worth a look", ref: "Reference landmark"
-  };
-
-  // Search zones across the West Austin Hill Country.
-  var zones = [
-    {
-      name: "Devil's Backbone (RR 32)",
-      tier: 1, lat: 29.962, lng: -98.175, radius: 7000,
-      elev: "1,100–1,400 ft",
-      drive: "~50 min SW",
-      county: "Hays / Comal",
-      why: "The iconic scenic ridge of the Hill Country — a narrow limestone spine with panoramic drop-offs on both sides. Big ranches sit right on the crest, giving you a genuine isolated-hilltop hall site with a commanding view down green valleys. As close to a Rohan ridgeline as Central Texas offers."
-    },
-    {
-      name: "Wimberley / Cypress Creek",
-      tier: 1, lat: 29.997, lng: -98.099, radius: 6500,
-      elev: "900–1,250 ft",
-      drive: "~50 min SW",
-      county: "Hays",
-      why: "Spring-fed, deeply green, live-oak and cypress hills with prominent knolls rising over the creeks. The lushest 'epic-hills-and-water' combination near Austin. Larger acreage exists on the surrounding ridges away from town."
-    },
-    {
-      name: "Driftwood / Dripping Springs (Onion Creek headwaters)",
-      tier: 1, lat: 30.135, lng: -98.045, radius: 7500,
-      elev: "1,000–1,300 ft",
-      drive: "~40 min W",
-      county: "Hays",
-      why: "Rolling, green, and the closest serious-acreage country to Austin. Onion Creek headwaters keep it lush; numerous 50–300 ac ranches with gentle hilltops and long western views. The pragmatic sweet spot — beauty without a long commute."
-    },
-    {
-      name: "Henly / Hye / Upper Blanco uplands",
-      tier: 2, lat: 30.205, lng: -98.290, radius: 8000,
-      elev: "1,300–1,600 ft",
-      drive: "~1 hr W",
-      county: "Blanco / Hays",
-      why: "Higher, more open rolling country between Dripping Springs and Johnson City along US-290. Bigger ranches, broad skies, and isolated rises that read as standalone hills — strong Edoras silhouette potential with elevation on your side."
-    },
-    {
-      name: "Spicewood / Pedernales / west Lake Travis",
-      tier: 2, lat: 30.470, lng: -98.150, radius: 8000,
-      elev: "850–1,250 ft",
-      drive: "~45 min W",
-      county: "Travis / Burnet",
-      why: "Dramatic vertical relief where the Pedernales and Lake Travis cut deep canyons — prominent bluff-top parcels with water views below. Greener canyon bottoms, exposed hilltops above. Excellent for a hall perched over a valley."
-    },
-    {
-      name: "Round Mountain / Cypress Mill",
-      tier: 2, lat: 30.430, lng: -98.355, radius: 8500,
-      elev: "1,300–1,700 ft",
-      drive: "~1 hr 10 NW",
-      county: "Blanco / Burnet",
-      why: "High plateau dotted with genuinely isolated, named hills (Round Mountain itself). Big working ranches, room for 200–500 ac, and the kind of freestanding knoll rising from a valley floor that most directly evokes Edoras."
-    },
-    {
-      name: "Blanco River valley / Twin Sisters",
-      tier: 2, lat: 30.075, lng: -98.420, radius: 7000,
-      elev: "1,300–1,500 ft",
-      drive: "~1 hr SW",
-      county: "Blanco",
-      why: "A green river valley framed by surrounding hills — the 'plains-ringed-by-mountains' geometry of Rohan. Twin Sisters peaks give nearby high prominences; the valley floor stays lush."
-    },
-    {
-      name: "Bee Cave / Lakeway escarpment",
-      tier: 3, lat: 30.310, lng: -97.950, radius: 5500,
-      elev: "850–1,150 ft",
-      drive: "~30 min W",
-      county: "Travis",
-      why: "The most dramatic close-in escarpment views over Lake Travis and the city — but parcels are small and extremely expensive, and assembling 50+ contiguous acres here is very hard. Closest, but the least likely to deliver true acreage."
-    },
-    {
-      name: "Marble Falls / Horseshoe Bay (granite domes)",
-      tier: 3, lat: 30.560, lng: -98.300, radius: 9000,
-      elev: "800–1,300 ft",
-      drive: "~1 hr NW",
-      county: "Burnet / Llano",
-      why: "Pink-granite dome country with bold, rounded hills and lake views — the rock itself is striking and very 'built-from-stone.' Drier and more open than the eastern Hill Country, but the geology gives unmistakable, monumental hills."
-    },
-    {
-      name: "Fredericksburg / Stonewall",
-      tier: 3, lat: 30.240, lng: -98.665, radius: 10000,
-      elev: "1,500–1,900 ft",
-      drive: "~1 hr 20 W",
-      county: "Gillespie",
-      why: "The highest, biggest-sky country with the largest ranches and genuine elevation. Drier and farther, but if you want a true high seat with enormous views and 300–500 ac, this delivers — Enchanted Rock's granite is just up the road."
-    },
-    {
-      name: "Enchanted Rock (geology reference)",
-      tier: "ref", lat: 30.506, lng: -98.819, radius: 3000,
-      elev: "1,825 ft summit",
-      drive: "reference only",
-      county: "Llano / Gillespie",
-      why: "Not for sale (it's a state natural area) — but this is the archetype: a massive granite dome rising 425 ft from the plain. Private granite-dome ranchland in surrounding Llano County is the closest you'll get to a natural stone hill made for a hall."
-    }
-  ];
-
   var map = L.map("map", { center: [30.18, -98.18], zoom: 10, zoomControl: false });
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
@@ -1124,53 +1018,6 @@ window.PROTECTED = [
   L.circleMarker([30.2672, -97.7431], {
     radius: 6, color: "#ffffff", weight: 2, fillColor: "#ffffff", fillOpacity: 0.9
   }).addTo(map).bindTooltip("Austin", { permanent: true, direction: "right", className: "austin-tt" });
-
-  var markers = {};
-
-  function popupHtml(z) {
-    var c = TIER_COLORS[z.tier];
-    return '<div class="pop-name">' + z.name + '</div>' +
-      '<div class="pop-tier" style="color:' + c + '">' + TIER_LABEL[z.tier] + '</div>' +
-      '<div class="pop-stat"><b>Elevation</b><span>' + z.elev + '</span></div>' +
-      '<div class="pop-stat"><b>From Austin</b><span>' + z.drive + '</span></div>' +
-      '<div class="pop-stat"><b>County</b><span>' + z.county + '</span></div>' +
-      '<div class="pop-why">' + z.why + '</div>';
-  }
-
-  zones.forEach(function (z, i) {
-    var c = TIER_COLORS[z.tier];
-    var circle = L.circle([z.lat, z.lng], {
-      radius: z.radius, color: c, weight: 2, fillColor: c,
-      fillOpacity: z.tier === "ref" ? 0.06 : 0.14, dashArray: z.tier === "ref" ? "5,5" : null
-    }).addTo(map);
-
-    var center = L.circleMarker([z.lat, z.lng], {
-      radius: 7, color: "#14110e", weight: 2, fillColor: c, fillOpacity: 1
-    }).addTo(map);
-
-    circle.bindPopup(popupHtml(z), { maxWidth: 300 });
-    center.bindPopup(popupHtml(z), { maxWidth: 300 });
-    markers[i] = { center: center, lat: z.lat, lng: z.lng };
-  });
-
-  // Build the sidebar list.
-  var list = document.getElementById("zone-list");
-  zones.forEach(function (z, i) {
-    var c = TIER_COLORS[z.tier];
-    var el = document.createElement("div");
-    el.className = "zone";
-    el.style.borderLeftColor = c;
-    el.innerHTML =
-      '<div class="ztop"><span class="zname">' + z.name + '</span>' +
-      '<span class="zelev">' + z.elev + '</span></div>' +
-      '<div class="zwhy">' + z.why + '</div>' +
-      '<div class="zmeta">' + z.county + ' · ' + z.drive + '</div>';
-    el.addEventListener("click", function () {
-      map.flyTo([z.lat, z.lng], 12, { duration: 1.1 });
-      setTimeout(function () { markers[i].center.openPopup(); }, 1150);
-    });
-    list.appendChild(el);
-  });
 
   // ---- Collapsible side panel ----
   var appEl = document.getElementById("app");
