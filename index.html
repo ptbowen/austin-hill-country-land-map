@@ -26,7 +26,24 @@
     background: var(--bg);
     color: var(--ink);
   }
-  #app { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
+  #app { display: flex; height: 100vh; width: 100vw; overflow: hidden; position: relative; }
+
+  /* Collapsible sidebar */
+  #sidebar-head { display: flex; align-items: center; justify-content: space-between; margin: -4px 0 12px; }
+  #sidebar-head span { font-size: 11px; letter-spacing: 1.3px; color: var(--muted); text-transform: uppercase; }
+  .collapse-btn {
+    cursor: pointer; background: var(--panel2); border: 1px solid var(--line);
+    color: var(--muted); border-radius: 6px; padding: 4px 10px; font-size: 12px;
+  }
+  .collapse-btn:hover { color: var(--ink); background: #2f2719; }
+  #app.panel-hidden #sidebar { display: none; }
+  #reopen {
+    display: none; position: absolute; top: 12px; left: 12px; z-index: 1200;
+    background: var(--panel); color: var(--gold); border: 1px solid var(--line);
+    border-radius: 8px; padding: 9px 13px; font-size: 13px; font-weight: 700; cursor: pointer;
+  }
+  #reopen:hover { background: var(--panel2); }
+  #app.panel-hidden #reopen { display: block; }
 
   /* ---- Sidebar ---- */
   #sidebar {
@@ -127,14 +144,20 @@
 
   @media (max-width: 760px) {
     #app { flex-direction: column; }
-    #sidebar { width: 100%; min-width: 0; height: auto; max-height: 42vh; border-right: none; border-bottom: 1px solid var(--line); }
-    #map { height: 58vh; }
+    #sidebar { width: 100%; min-width: 0; height: auto; max-height: 50vh; border-right: none; border-bottom: 1px solid var(--line); }
+    #map { height: 50vh; }
+    #app.panel-hidden #map { height: 100vh; }
   }
 </style>
 </head>
 <body>
 <div id="app">
+  <button id="reopen">&#9776; Show panel</button>
   <aside id="sidebar">
+    <div id="sidebar-head">
+      <span>Meduseld Site Search</span>
+      <button class="collapse-btn" id="hidePanel">Hide &#10094;</button>
+    </div>
     <h1>The <span class="gold">Meduseld</span> Site Search</h1>
     <p class="tagline">Finding the golden hall of Edoras in the West Austin Hill Country</p>
 
@@ -952,7 +975,8 @@ window.PROTECTED = [
     }
   ];
 
-  var map = L.map("map", { center: [30.18, -98.18], zoom: 10, zoomControl: true });
+  var map = L.map("map", { center: [30.18, -98.18], zoom: 10, zoomControl: false });
+  L.control.zoom({ position: "bottomright" }).addTo(map);
 
   // Real elevation contour lines.
   var topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
@@ -1093,7 +1117,7 @@ window.PROTECTED = [
       "Protected / never-for-sale land": protectedLayer,
       "Your spot: pond hilltop (RM 165)": spottedLayer
     },
-    { position: "topright", collapsed: false }
+    { position: "topright", collapsed: true }
   ).addTo(map);
 
   // Austin reference marker.
@@ -1147,6 +1171,19 @@ window.PROTECTED = [
     });
     list.appendChild(el);
   });
+
+  // ---- Collapsible side panel ----
+  var appEl = document.getElementById("app");
+  function setPanel(hidden) {
+    appEl.classList.toggle("panel-hidden", hidden);
+    setTimeout(function () { map.invalidateSize(); }, 60);
+  }
+  document.getElementById("hidePanel").addEventListener("click", function () { setPanel(true); });
+  document.getElementById("reopen").addEventListener("click", function () { setPanel(false); });
+  // On small screens, start collapsed so the map gets the full viewport.
+  if (window.matchMedia && window.matchMedia("(max-width: 760px)").matches) {
+    setPanel(true);
+  }
 </script>
 </body>
 </html>
